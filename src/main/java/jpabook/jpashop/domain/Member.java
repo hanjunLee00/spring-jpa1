@@ -22,4 +22,10 @@ public class Member {
 
     @OneToMany
     private List<Order> orders = new ArrayList<>();
+
+    public Member(){}
+
+    public Member(String name){
+        this.name = name;
+    }
 }
