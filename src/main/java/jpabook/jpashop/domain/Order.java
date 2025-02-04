@@ -30,11 +30,11 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) //Many 로 끝나는 매핑관계는 기본 패치 전략이 LAZY
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY) //One 으로 끝나는 매핑관계는 기본 패치 전략이 EAGER => 패치타입을 바꿔주는게 좋음
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //One 으로 끝나는 매핑관계는 기본 패치 전략이 EAGER => 패치타입을 바꿔주는게 좋음
     @JoinColumn(name="delivery_id")
     private Delivery delivery;
 
-    private LocalDateTime deliveryTime;
+    private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status; //주문상태 [ORDER, CANCEL]
@@ -64,7 +64,7 @@ public class Order {
             order.addOrderItem(orderItem);
         }
         order.setStatus(OrderStatus.ORDER);
-        order.setDeliveryTime(LocalDateTime.now());
+        order.setOrderDate(LocalDateTime.now());
         return order;
     }
 

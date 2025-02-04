@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 
 public class OrderSearch {
-
     private String memberName;
     private OrderStatus orderStatus; //주문 상태[ORDER, CANCEL]
 }
