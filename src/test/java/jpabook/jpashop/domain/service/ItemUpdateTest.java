@@ -1,7 +1,7 @@
 package jpabook.jpashop.domain.service;
 
 import jakarta.persistence.EntityManager;
-import jpabook.jpashop.domain.item.Book;
+import jpabook.jpashop.item.Book;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
