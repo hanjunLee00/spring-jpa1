@@ -1,10 +1,12 @@
 package jpabook.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDateTime;
@@ -27,9 +29,12 @@ public class Order {
     private Member member;
 
     //Cascade 속성으로 한 번에 모두 저장 및 삭제 가능 (persist 전파하는 원리)
+    @JsonIgnore
+    @BatchSize(size = 100)
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) //Many 로 끝나는 매핑관계는 기본 패치 전략이 LAZY
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //One 으로 끝나는 매핑관계는 기본 패치 전략이 EAGER => 패치타입을 바꿔주는게 좋음
     @JoinColumn(name="delivery_id")
     private Delivery delivery;
